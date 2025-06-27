@@ -5,7 +5,7 @@ const Navbar = () => {
     return (
         <div className="navbar bg-base-100 shadow-sm flex justify-between">
             <div className="">
-                <a className="btn btn-ghost text-xl"><Link to={'/'}>Foody</Link></a>
+                <span className="btn btn-ghost text-xl"><Link to={'/'}>Foody</Link></span>
             </div>
             <div>
                 <ul className='flex gap-5 items-center'>

@@ -2,16 +2,17 @@ import React, { useContext, useState } from 'react'
 import { AuthContext } from '../../provider/AuthProvider'
 import { FaGoogle } from 'react-icons/fa'
 
-const Login = () => {
-    const { loading, SignIn, googleSignIn } = useContext(AuthContext)
+const Register = () => {
+    const { loading, createUser, googleSignIn } = useContext(AuthContext)
     const [loadingSignIn, setLoadingSignIn] = useState(false)
-    const handleLogin = (event) => {
+    const handleRegister = (event) => {
         setLoadingSignIn(true)
         event.preventDefault()
+        const name = event.target.name.value
         const email = event.target.email.value
         const password = event.target.password.value
 
-        SignIn(email, password)
+        createUser(email, password)
             .then((user) => {
                 console.log(user)
             })
@@ -34,13 +35,15 @@ const Login = () => {
 
                 <div className="card bg-base-100 w-[400px] shrink-0 shadow-2xl">
                     <div className="card-body">
-                        <form onSubmit={handleLogin} className="fieldset">
+                        <form onSubmit={handleRegister} className="fieldset">
+                            <label className="label">Name</label>
+                            <input type="text" name='name' className="input" placeholder="Name" />
                             <label className="label">Email</label>
                             <input type="email" name='email' className="input" placeholder="Email" />
                             <label className="label">Password</label>
                             <input type="password" name='password' className="input" placeholder="Password" />
                             <div><a className="link link-hover">Forgot password?</a></div>
-                            {loading && loadingSignIn ? <button type='submit' className="btn btn-neutral mt-4"><span className="loading loading-spinner loading-md text-white"></span></button> : <button type='submit' className="btn btn-neutral mt-4">Login</button>}
+                            {loading && loadingSignIn ? <button type='submit' className="btn btn-neutral mt-4"><span className="loading loading-spinner loading-md text-white"></span></button> : <button type='submit' className="btn btn-neutral mt-4">Signup</button>}
 
                         </form>
                         <button onClick={handleSignInWithGoogle} className='btn btn-outline uppercase'><FaGoogle />sign in with google </button>
@@ -51,4 +54,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default Register

@@ -5,7 +5,7 @@ import food3 from '../assets/images/food3.jpg'
 import food4 from '../assets/images/food4.jpg'
 import { Link } from 'react-router-dom'
 const Carousel = () => {
-    const bannerImages = [food1, food2, food3, food4]
+    // const bannerImages = [food1, food2, food3, food4]
     const bannerInfo = [
         {
             img: food1,
