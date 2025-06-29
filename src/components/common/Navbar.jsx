@@ -1,7 +1,20 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import { AuthContext } from '../../provider/AuthProvider'
+import toast from 'react-hot-toast'
 
 const Navbar = () => {
+    const { user, logout } = useContext(AuthContext)
+    //console.log(user)
+    const handleLogout = () => {
+        if (user) {
+            logout()
+            toast.success("logout successfull.")
+        } else {
+            toast("You are not logged in yet. Please login first")
+        }
+
+    }
     return (
         <div className="navbar bg-base-100 shadow-sm flex justify-between">
             <div className="">
@@ -45,13 +58,16 @@ const Navbar = () => {
                         tabIndex={0}
                         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
                         <li>
+                            <span>{user?.displayName}</span>
+                        </li>
+                        <li>
                             <a className="justify-between">
                                 Profile
                                 <span className="badge">New</span>
                             </a>
                         </li>
                         <li><a>Settings</a></li>
-                        <li><a>Logout</a></li>
+                        <li>{user ? <button onClick={handleLogout}>Logout</button> : <Link to={'/login'}>Login</Link>}</li>
                     </ul>
                 </div>
             </div>

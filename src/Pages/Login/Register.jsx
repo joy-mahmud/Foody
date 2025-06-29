@@ -1,10 +1,16 @@
 import React, { useContext, useState } from 'react'
 import { AuthContext } from '../../provider/AuthProvider'
 import { FaGoogle } from 'react-icons/fa'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { updateProfile } from 'firebase/auth'
+import { auth } from '../../firebase/firebase.config'
+import toast from 'react-hot-toast'
 
 const Register = () => {
     const { loading, createUser, googleSignIn } = useContext(AuthContext)
     const [loadingSignIn, setLoadingSignIn] = useState(false)
+    const navigate = useNavigate()
+    const location = useLocation()
     const handleRegister = (event) => {
         setLoadingSignIn(true)
         event.preventDefault()
@@ -15,18 +21,26 @@ const Register = () => {
         createUser(email, password)
             .then((user) => {
                 console.log(user)
+                event.target.reset()
+                updateProfile(auth.currentUser, {
+                    displayName: name,
+                }).then(() => {
+                    toast.success("Registration successfull !")
+                    navigate(location?.state ? location.state : '/')
+                })
             })
-            .catch((error) => {
-                console.log(error)
+            .catch(() => {
+                toast.error("Something went wrong,Registration failed !")
             })
     }
     const handleSignInWithGoogle = () => {
         googleSignIn()
-            .then((user) => {
-                console.log(user)
+            .then(() => {
+                toast.success("Google SignIn succefull!")
+                navigate(location?.state ? location.state : '/')
             })
-            .catch((error) => {
-                console.log(error)
+            .catch(() => {
+                toast.error("Somethin went wrong, SignIn with google failed !")
             })
     }
     return (
@@ -42,7 +56,7 @@ const Register = () => {
                             <input type="email" name='email' className="input" placeholder="Email" />
                             <label className="label">Password</label>
                             <input type="password" name='password' className="input" placeholder="Password" />
-                            <div><a className="link link-hover">Forgot password?</a></div>
+                            <div><span className="link link-hover"><Link to={'/login'}>Already have an account?Login.</Link></span></div>
                             {loading && loadingSignIn ? <button type='submit' className="btn btn-neutral mt-4"><span className="loading loading-spinner loading-md text-white"></span></button> : <button type='submit' className="btn btn-neutral mt-4">Signup</button>}
 
                         </form>

@@ -1,10 +1,14 @@
 import React, { useContext, useState } from 'react'
 import { AuthContext } from '../../provider/AuthProvider'
 import { FaGoogle } from 'react-icons/fa'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import toast from 'react-hot-toast'
 
 const Login = () => {
     const { loading, SignIn, googleSignIn } = useContext(AuthContext)
     const [loadingSignIn, setLoadingSignIn] = useState(false)
+    const navigate = useNavigate()
+    const location = useLocation()
     const handleLogin = (event) => {
         setLoadingSignIn(true)
         event.preventDefault()
@@ -12,20 +16,22 @@ const Login = () => {
         const password = event.target.password.value
 
         SignIn(email, password)
-            .then((user) => {
-                console.log(user)
+            .then(() => {
+                toast.success("Login successfull !")
+                navigate(location?.state ? location.state : '/')
             })
-            .catch((error) => {
-                console.log(error)
+            .catch(() => {
+                toast.error("Something went wrong,Login failed !")
             })
     }
     const handleSignInWithGoogle = () => {
         googleSignIn()
-            .then((user) => {
-                console.log(user)
+            .then(() => {
+                toast.success("Google SignIn succefull!")
+                navigate(location?.state ? location.state : '/')
             })
-            .catch((error) => {
-                console.log(error)
+            .catch(() => {
+                toast.error("Somethin went wrong, SignIn with google failed !")
             })
     }
     return (
@@ -39,7 +45,7 @@ const Login = () => {
                             <input type="email" name='email' className="input" placeholder="Email" />
                             <label className="label">Password</label>
                             <input type="password" name='password' className="input" placeholder="Password" />
-                            <div><a className="link link-hover">Forgot password?</a></div>
+                            <div><span className="link link-hover"><Link to={'/signup'}>Don't have an account?SignUp.</Link></span></div>
                             {loading && loadingSignIn ? <button type='submit' className="btn btn-neutral mt-4"><span className="loading loading-spinner loading-md text-white"></span></button> : <button type='submit' className="btn btn-neutral mt-4">Login</button>}
 
                         </form>
