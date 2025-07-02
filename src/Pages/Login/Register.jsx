@@ -5,6 +5,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { updateProfile } from 'firebase/auth'
 import { auth } from '../../firebase/firebase.config'
 import toast from 'react-hot-toast'
+import axios from 'axios'
 
 const Register = () => {
     const { loading, createUser, googleSignIn } = useContext(AuthContext)
@@ -24,9 +25,14 @@ const Register = () => {
                 event.target.reset()
                 updateProfile(auth.currentUser, {
                     displayName: name,
-                }).then(() => {
-                    toast.success("Registration successfull !")
-                    navigate(location?.state ? location.state : '/')
+                }).then(async () => {
+                    const userInfo = { name, email }
+                    const response = await axios.post("http://localhost:8000/api/save-user", userInfo)
+                    if (response.status == 200) {
+                        toast.success("Registration successfull !")
+                        navigate(location?.state ? location.state : '/')
+                    }
+
                 })
             })
             .catch(() => {
