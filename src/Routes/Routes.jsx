@@ -30,8 +30,8 @@ const router = createBrowserRouter([
                 element: <Register />
             },
             {
-                path:'add-food',
-                element:<AddFoodItem/>
+                path: 'add-food',
+                element: <AddFoodItem />
             }
         ]
     },
