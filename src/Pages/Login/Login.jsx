@@ -19,19 +19,24 @@ const Login = () => {
             .then(() => {
                 toast.success("Login successfull !")
                 navigate(location?.state ? location.state : '/')
+                setLoadingSignIn(false)
             })
             .catch(() => {
                 toast.error("Something went wrong,Login failed !")
+                setLoadingSignIn(false)
             })
     }
     const handleSignInWithGoogle = () => {
+        setLoadingSignIn(true)
         googleSignIn()
             .then(() => {
                 toast.success("Google SignIn succefull!")
                 navigate(location?.state ? location.state : '/')
+                setLoadingSignIn(false)
             })
             .catch(() => {
                 toast.error("Somethin went wrong, SignIn with google failed !")
+                setLoadingSignIn(false)
             })
     }
     return (
