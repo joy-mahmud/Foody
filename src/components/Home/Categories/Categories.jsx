@@ -22,7 +22,7 @@ const CategoriesSection = () => {
                         const cat = item.name
                         //const catLower = item.name.toLocaleLowerCase()
                         return (<Link key={idx} to={`category/${cat}`} className='w-full border rounded-lg py-6 flex flex-col items-center justify-center bg-white shadow-sm hover:shadow-md hover:scale-105 transition-all duration-300 hover:cursor-pointer'>
-                            <button>
+                            <button className='flex flex-col'>
                                 <span className='text-3xl mb-2'>{item.emoji}</span>
                                 <span className='font-semibold text-gray-700'>{item.name}</span>
                             </button>

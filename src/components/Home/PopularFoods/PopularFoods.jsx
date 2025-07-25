@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { BASE_URL } from '../../utils/constants'
+import { BASE_URL } from '../../../utils/constants'
+
 
 export const PopularFoods = () => {
     const [foods, setfoods] = useState([])
