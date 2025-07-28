@@ -5,7 +5,7 @@ import { Toaster } from 'react-hot-toast'
 
 const Root = () => {
     return (
-        <div className='container mx-auto'>
+        <div className=''>
             <Navbar />
             <Outlet>
 

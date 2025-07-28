@@ -60,7 +60,7 @@ const CustomerReviews = () => {
         slidesToScroll: 1,
     };
     return (
-        <section className="max-w-6xl mx-auto px-4 mb-20">
+        <section className=" mx-auto px-4 mb-20">
             <h2 className="text-center text-3xl font-bold mb-10">💬 What Our Client Say</h2>
             <Slider {...settings} className=" bg-gray-200 rounded-3xl py-10">
                 {
