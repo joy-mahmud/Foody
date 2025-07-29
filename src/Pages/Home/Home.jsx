@@ -7,6 +7,7 @@ import WhyChooseUs from '../../components/WhyChooseUs/WhyChooseUs'
 import CustomerReviews from '../../components/CustomerReviews/CustomerReviews'
 import HowItWorks from '../../components/HowItworks/HowItworks'
 import CTASection from '../../components/CTASection/CTASection'
+import Footer from '../../components/common/Footer'
 
 const Home = () => {
     return (
@@ -18,6 +19,7 @@ const Home = () => {
             <CustomerReviews/>
             <HowItWorks/>
             <CTASection/>
+            <Footer/>
         </div>
     )
 }

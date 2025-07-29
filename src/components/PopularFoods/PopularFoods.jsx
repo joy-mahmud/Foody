@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
+import { BASE_URL } from '../../utils/constants';
+import { AuthContext } from '../../provider/AuthProvider';
+import toast from 'react-hot-toast';
 
 const PopularFoods = () => {
   const [foods, setFoods] = useState([]);
-
+  const {user} = useContext(AuthContext)
   useEffect(() => {
     axios.get('http://localhost:8000/api/popular-foods/')
       .then(res => {
@@ -13,6 +16,18 @@ const PopularFoods = () => {
         console.error('Failed to fetch popular foods:', err);
       });
   }, []);
+
+  const handleAddToCart = async(food_id)=>{
+   try {
+     const cartInfo = {food_id,user_email:user.email,quantity:1}
+    const res = await axios.post(`${BASE_URL}/api/add-to-cart/`,{...cartInfo})
+    if (res.status===201){
+      toast.success("Food item added to cart successfully")
+    }
+   } catch (error) {
+    toast.error("something went wrong")
+   }
+  }
 
   return (
     <section className="max-w-6xl mx-auto px-4 py-12">
@@ -34,7 +49,7 @@ const PopularFoods = () => {
                   <span className="text-lg font-bold text-orange-500">${item.price}</span>
                   <span className="text-yellow-500 font-medium">⭐ {item.rating}</span>
                 </div>
-                <button className="mt-4 w-full btn btn-neutral">Order Now</button>
+                <button onClick={()=>handleAddToCart(item.id)} className="mt-4 w-full btn btn-neutral">Order Now</button>
               </div>
             </div>
           ))
