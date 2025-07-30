@@ -8,6 +8,7 @@ import Register from "../Pages/Login/Register";
 import AddFoodItem from "../Pages/AddFoodItem/AddFoodItem";
 import UpdateFoodItem from "../Pages/UpdateFoodItem/UpdateFoodItem";
 import FoodsCategory from "../Pages/FoodsCategory/FoodsCategory";
+import CartPage from "../Pages/CartPage/CartPage";
 
 const router = createBrowserRouter([
     {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
             {
                 path: 'category/:cat',
                 element: <FoodsCategory />
+            },
+            {
+                path: 'cart',
+                element: <CartPage />
             },
             {
                 path: 'login',
