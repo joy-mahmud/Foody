@@ -1,11 +1,17 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 
 import { CartContext } from '../../provider/CartProvider'
 import { MdDelete } from 'react-icons/md'
 
 const CartPage = () => {
-    const { cart, loading } = useContext(CartContext)
+    const { cart, loading, removeFromCart } = useContext(CartContext)
+    const [totalPrice, setTotalPrice] = useState(0)
+    useEffect(() => {
+        if (!loading) {
+            setTotalPrice(cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2))
+        }
+    }, [loading, cart])
     if (loading) {
         return (
             <div className='flex pt-32 items-center justify-center'>
@@ -35,10 +41,10 @@ const CartPage = () => {
                                 </div>
                                 <div className='flex gap-5 items-center'>
                                     <button className=' hover:cursor-pointer h-10 w-10 bg-gray-800 rounded-full text-white'>+</button>
-                                    <span><p className='text-sm text-gray-600'>Quantity:{item.quantity}</p></span>
+                                    <span><p className=' text-gray-600'>Quantity: <b>{item.quantity}</b></p></span>
                                     <button className='hover:cursor-pointer h-10 w-10 bg-gray-800 rounded-full text-white'>-</button>
                                 </div>
-                                <button className='bg-gray-300 rounded-lg w-[40px] h-[40px] flex items-center justify-center hover:cursor-pointer'>
+                                <button onClick={() => removeFromCart(item.id)} className='bg-gray-300 rounded-lg w-[40px] h-[40px] flex items-center justify-center hover:cursor-pointer'>
                                     <MdDelete color='red' size={25} />
                                 </button>
                             </div>
@@ -46,7 +52,7 @@ const CartPage = () => {
                         ))}
                         {
                             cart && <div className='mt-8 flex justify-between items-center'>
-                                <h3 className='text-lg font-semibold'>Total:$00</h3>
+                                <h3 className='text-lg font-semibold'>Total:${totalPrice}</h3>
                                 <button className='px-5 py-2 text-white bg-yellow-500 hover:bg-yellow-600 rounded-lg'>Proceed to Checkout</button>
                             </div>
                         }
