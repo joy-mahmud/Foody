@@ -43,8 +43,24 @@ const CartProvider = ({ children }) => {
         }
 
     }
+    const updateQuantity = async (cart_item_id, quantity) => {
+        try {
+            await axios.post(`${BASE_URL}api/update-cart-item-quantity/`, {
+                cart_item_id,
+                quantity,
+            });
+            setCart(prev =>
+                prev.map(item =>
+                    item.id === cart_item_id ? { ...item, quantity } : item
+                )
+            );
 
-    const cartInfo = { loading, cart, removeFromCart }
+        } catch (err) {
+            console.error("Quantity update failed", err);
+        }
+    };
+
+    const cartInfo = { loading, cart, updateQuantity, removeFromCart }
     return (
         <CartContext.Provider value={cartInfo}>
             {
