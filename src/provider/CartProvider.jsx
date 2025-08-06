@@ -31,6 +31,38 @@ const CartProvider = ({ children }) => {
         }
     }, [user])
 
+    const addToCart = async (food_id) => {
+        try {
+            const CartData = { food_id: food_id, user_email: user.email, quantity: 1 }
+            const res = await axios.post(`${BASE_URL}/api/add-to-cart/`, { ...CartData })
+            if (res.status == 201) {
+                toast.success("food item added to cart successfully")
+            }
+        } catch (error) {
+            console.log(error)
+            toast.error('something went wrong')
+        }
+    }
+
+    const updateQuantity = async (cart_item_id, quantity) => {
+        try {
+            await axios.post(`${BASE_URL}/api/update-cart-item-quantity/`, { cart_item_id, quantity })
+            //setCart(prev=>prev.map(item=>item.id === cart_item_id?{...item,quantity}:item ))
+            setCart(prev => {
+                return prev.map((item) => {
+                    if (item.id === cart_item_id) {
+                        return { ...item, quantity }
+                    } else {
+                        return item
+                    }
+                })
+            })
+        } catch (error) {
+            console.error("Quantity updation failed", error)
+        }
+
+    }
+
     const removeFromCart = async (item_id) => {
         try {
             const res = await axios.delete(`${BASE_URL}/api/remove-cart-item/`, { data: { cart_item_id: item_id } })
@@ -44,7 +76,7 @@ const CartProvider = ({ children }) => {
 
     }
 
-    const cartInfo = { loading, cart, removeFromCart }
+    const cartInfo = { loading, cart, removeFromCart, addToCart, updateQuantity }
     return (
         <CartContext.Provider value={cartInfo}>
             {
