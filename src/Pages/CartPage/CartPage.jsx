@@ -21,7 +21,8 @@ const CartPage = () => {
             })
         }
     }, [loading, cart])
-    console.log(quantities)
+    const debounceUpdate = useCallback(debounce((id, qunatity) => { updateQuantity(id, qunatity) }, 500), [])
+
     if (loading) {
         return (
             <div className='flex pt-32 items-center justify-center'>
@@ -30,7 +31,6 @@ const CartPage = () => {
 
         )
     }
-    // const debounceUpdate = debounce((id, qunatity) => { updateQuantity(id, qunatity) }, 500)
 
     const handleChangeQuantity = (id, delta) => {
         const current = quantities[id]
@@ -39,7 +39,7 @@ const CartPage = () => {
             ...prev,
             [id]: quantity
         }))
-        updateQuantity(id, quantity)
+        debounceUpdate(id, quantity)
     }
     const handleInputQuantityChange = (id, value) => {
         const parsedValue = parseInt(value, 10)
@@ -48,7 +48,7 @@ const CartPage = () => {
             ...prev,
             [id]: quantity
         }))
-        updateQuantity(id, quantity)
+        debounceUpdate(id, quantity)
     }
     return (
         <div className='container mx-auto px-4 py-10'>
