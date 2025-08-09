@@ -30,6 +30,19 @@ const CartProvider = ({ children }) => {
             fetchCart()
         }
     }, [user])
+    const handleAddToCart = async (food_id) => {
+        try {
+            const CartData = { food_id: food_id, user_email: user.email, quantity: 1 }
+            const res = await axios.post(`${BASE_URL}/api/add-to-cart/`, { ...CartData })
+            if (res.status == 201) {
+                toast.success("food item added to cart successfully")
+                fetchCart()
+            }
+        } catch (error) {
+            console.log(error)
+            toast.error('something went wrong')
+        }
+    }
 
     const removeFromCart = async (item_id) => {
         try {
@@ -60,7 +73,7 @@ const CartProvider = ({ children }) => {
         }
     };
 
-    const cartInfo = { loading, cart, updateQuantity, removeFromCart }
+    const cartInfo = { loading, cart, updateQuantity, removeFromCart, handleAddToCart }
     return (
         <CartContext.Provider value={cartInfo}>
             {

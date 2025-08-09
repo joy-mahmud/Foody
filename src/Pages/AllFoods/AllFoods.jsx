@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import { BASE_URL } from '../../utils/constants'
+import { CartContext } from '../../provider/CartProvider'
 const AllFoods = () => {
+    const { handleAddToCart } = useContext(CartContext)
     const [foods, setFoods] = useState(null)
 
     useEffect(() => {
@@ -28,7 +30,7 @@ const AllFoods = () => {
                                 <p className='text-gray-600 text-sm '><strong>Quantity: </strong>{item.quantity}</p>
                                 <p className='text-gray-600 text-sm '><strong>Price: </strong>{item.price}</p>
                                 <p className='text-gray-600 text-sm '><strong>Rating: </strong>{item.rating}</p>
-                                <button className='btn btn-neutral mt-3 w-full'>Order now</button>
+                                <button onClick={() => handleAddToCart(item.id)} className='btn btn-neutral mt-3 w-full'>Order now</button>
                             </div>
 
                         </div>

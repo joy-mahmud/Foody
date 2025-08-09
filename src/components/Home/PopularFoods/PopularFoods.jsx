@@ -2,12 +2,12 @@ import axios from 'axios'
 import React, { useContext, useEffect, useState } from 'react'
 import { BASE_URL } from '../../../utils/constants'
 import { AuthContext } from '../../../provider/AuthProvider'
-import toast from 'react-hot-toast'
+import { CartContext } from '../../../provider/CartProvider'
 
 
 export const PopularFoods = () => {
     const [foods, setfoods] = useState([])
-    const { user } = useContext(AuthContext)
+    const { handleAddToCart } = useContext(CartContext)
     useEffect(() => {
         const getPopularFoods = async () => {
             const res = await axios.get(`${BASE_URL}/api/popular-foods/`)
@@ -15,18 +15,7 @@ export const PopularFoods = () => {
         }
         getPopularFoods()
     }, [])
-    const handleAddToCart = async (food_id) => {
-        try {
-            const CartData = { food_id: food_id, user_email: user.email, quantity: 1 }
-            const res = await axios.post(`${BASE_URL}/api/add-to-cart/`, { ...CartData })
-            if (res.status == 201) {
-                toast.success("food item added to cart successfully")
-            }
-        } catch (error) {
-            console.log(error)
-            toast.error('something went wrong')
-        }
-    }
+
     return (
         <section className='mx-auto py-12'>
             <h2 className='text-3xl font-bold text-center mb-8'>Popular Foods</h2>
