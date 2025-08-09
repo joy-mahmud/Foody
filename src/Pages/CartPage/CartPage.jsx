@@ -1,8 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 
 
 import { CartContext } from '../../provider/CartProvider'
 import { MdDelete } from 'react-icons/md'
+import debounce from 'lodash.debounce'
 
 const CartPage = () => {
     const { cart, loading, removeFromCart, updateQuantity } = useContext(CartContext)
@@ -29,10 +30,24 @@ const CartPage = () => {
 
         )
     }
+    // const debounceUpdate = debounce((id, qunatity) => { updateQuantity(id, qunatity) }, 500)
 
     const handleChangeQuantity = (id, delta) => {
         const current = quantities[id]
         const quantity = Math.max(1, current + delta)
+        setQuantities((prev) => ({
+            ...prev,
+            [id]: quantity
+        }))
+        updateQuantity(id, quantity)
+    }
+    const handleInputQuantityChange = (id, value) => {
+        const parsedValue = parseInt(value, 10)
+        const quantity = isNaN(parsedValue) || parsedValue < 1 ? 1 : parsedValue
+        setQuantities((prev) => ({
+            ...prev,
+            [id]: quantity
+        }))
         updateQuantity(id, quantity)
     }
     return (
@@ -45,7 +60,7 @@ const CartPage = () => {
 
                     <div className='space-y-5'>
                         {cart.map((item, idx) => (
-                            <div key={idx} className='flex items-center justify-between rounded-xl shadow-md px-5 py-2'>
+                            <div key={idx} className='grid grid-cols-3 items-center justify-between rounded-xl shadow-md px-5 py-2'>
                                 <div className='flex items-center gap-4'>
                                     <img src={item.image} alt={item.title} className='h-20 w-20 rounded-lg object-cover' />
                                     <div>
@@ -54,14 +69,22 @@ const CartPage = () => {
 
                                     </div>
                                 </div>
-                                <div className='flex gap-5 items-center'>
+                                <div className='flex gap-5 items-center justify-center'>
                                     <button onClick={() => handleChangeQuantity(item.id, 1)} className=' hover:cursor-pointer h-10 w-10 bg-gray-800 rounded-full text-white'>+</button>
-                                    <span><p className=' text-gray-600'>Quantity: <b>{quantities[item.id]}</b></p></span>
+                                    <span className=' text-gray-600'>Quantity:
+                                        <input
+                                            type='number'
+                                            value={quantities[item.id] || 1}
+                                            onChange={(e) => handleInputQuantityChange(item.id, e.target.value)}
+                                            className='w-16 px-2 py-1 border rounded text-center' />
+                                    </span>
                                     <button onClick={() => handleChangeQuantity(item.id, -1)} className='hover:cursor-pointer h-10 w-10 bg-gray-800 rounded-full text-white'>-</button>
                                 </div>
-                                <button onClick={() => removeFromCart(item.id)} className='bg-gray-300 rounded-lg w-[40px] h-[40px] flex items-center justify-center hover:cursor-pointer'>
-                                    <MdDelete color='red' size={25} />
-                                </button>
+                                <div className='flex justify-end'>
+                                    <button onClick={() => removeFromCart(item.id)} className='bg-gray-300 rounded-lg w-[40px] h-[40px] flex items-center justify-center hover:cursor-pointer'>
+                                        <MdDelete color='red' size={25} />
+                                    </button>
+                                </div>
                             </div>
 
                         ))}
