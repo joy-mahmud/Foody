@@ -38,6 +38,7 @@ const CartProvider = ({ children }) => {
             if (res.status == 201) {
                 toast.success("food item added to cart successfully")
             }
+            fetchCart()
         } catch (error) {
             console.log(error)
             toast.error('something went wrong')
