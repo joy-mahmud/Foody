@@ -9,6 +9,7 @@ import AddFoodItem from "../Pages/AddFoodItem/AddFoodItem";
 import UpdateFoodItem from "../Pages/UpdateFoodItem/UpdateFoodItem";
 import FoodsCategory from "../Pages/FoodsCategory/FoodsCategory";
 import CartPage from "../Pages/CartPage/CartPage";
+import AdminRoute from "../privateRoutes/AdminRoute";
 
 const router = createBrowserRouter([
     {
@@ -42,7 +43,7 @@ const router = createBrowserRouter([
             },
             {
                 path: 'add-food',
-                element: <AddFoodItem />
+                element: <AdminRoute><AddFoodItem /></AdminRoute>
             },
             {
                 path: 'update-food/:id',

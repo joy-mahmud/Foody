@@ -2,6 +2,8 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { BASE_URL } from '../../utils/constants'
 import toast from 'react-hot-toast'
+import { AuthContext } from '../../provider/AuthProvider'
+
 
 const AddFoodItem = () => {
     const [preview, setPreview] = useState(null)
