@@ -10,6 +10,8 @@ import UpdateFoodItem from "../Pages/UpdateFoodItem/UpdateFoodItem";
 import FoodsCategory from "../Pages/FoodsCategory/FoodsCategory";
 import CartPage from "../Pages/CartPage/CartPage";
 import AdminRoute from "../privateRoutes/AdminRoute";
+import DashBoardLayout from "../Layout/DashBoardLayout";
+import DashBoardAllFoods from "../Pages/Dashboard/DashBoardAllFoods";
 
 const router = createBrowserRouter([
     {
@@ -40,17 +42,29 @@ const router = createBrowserRouter([
             {
                 path: 'signup',
                 element: <Register />
-            },
+            }
+
+        ]
+    },
+    {
+        path: 'dashboard',
+        element: <AdminRoute><DashBoardLayout /></AdminRoute>,
+        errorElement: <ErrorPage />,
+        children: [
             {
                 path: 'add-food',
                 element: <AdminRoute><AddFoodItem /></AdminRoute>
             },
             {
                 path: 'update-food/:id',
-                element: <UpdateFoodItem />
+                element: <AdminRoute><UpdateFoodItem /></AdminRoute>
+            },
+            {
+                path: 'all-foods',
+                element: <DashBoardAllFoods />
             }
         ]
-    },
+    }
 ]);
 
 export default router
