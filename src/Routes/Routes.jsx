@@ -61,7 +61,7 @@ const router = createBrowserRouter([
             },
             {
                 path: 'all-foods',
-                element: <DashBoardAllFoods />
+                element: <AdminRoute> <DashBoardAllFoods /></AdminRoute>
             }
         ]
     }

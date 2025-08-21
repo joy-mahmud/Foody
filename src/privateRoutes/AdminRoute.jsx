@@ -10,7 +10,7 @@ const AdminRoute = ({ children }) => {
 
     // Wait until user auth and role are fully loaded
     if (userLoading || roleLoading) {
-        return <p>Loading...</p>
+        return <div className='h-screen flex justify-center items-center'><span className="loading loading-spinner loading-xl"></span></div>
     }
 
     if (user && isAdmin) {

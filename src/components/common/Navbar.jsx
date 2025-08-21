@@ -24,7 +24,7 @@ const Navbar = () => {
 
     }
     return (
-        <div className="navbar bg-base-100 shadow-sm flex justify-between">
+        <div className="navbar bg-base-100 shadow-sm flex justify-between sticky top-0 z-30">
             <div className="">
                 <span className="btn btn-ghost text-xl"><Link to={'/'}>Foody</Link></span>
             </div>

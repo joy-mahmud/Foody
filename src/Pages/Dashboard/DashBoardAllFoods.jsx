@@ -2,13 +2,19 @@ import React, { useEffect, useState } from 'react'
 import { BASE_URL } from '../../utils/constants'
 import axios from 'axios'
 import TableSkeleten from '../../components/common/TableSkeleten'
+import { FaEdit } from 'react-icons/fa'
+import { RiDeleteBin6Line } from 'react-icons/ri'
+import { Link } from 'react-router-dom'
+import toast from 'react-hot-toast'
+import Swal from 'sweetalert2'
 
 const DashBoardAllFoods = () => {
     const [allFoods, setAllFoods] = useState(null)
     const [page, setPage] = useState(1)
     const [numOfPage, setNumOfpages] = useState(1)
     const [loading, setLoading] = useState(false)
-    const page_size = 6
+    const [deleteFlag, setDeleteFlag] = useState(false)
+    const page_size = 10
     useEffect(() => {
         try {
             const fetchData = async () => {
@@ -29,7 +35,7 @@ const DashBoardAllFoods = () => {
             console.log(error)
             setLoading(false)
         }
-    }, [page])
+    }, [page, deleteFlag])
     const goToPrevious = () => {
         if (page > 1) {
             setPage(prev => Number(prev) - 1)
@@ -40,7 +46,35 @@ const DashBoardAllFoods = () => {
             setPage(prev => Number(prev) + 1)
         }
     }
+    const deleteFoodItem = async (id) => {
+        try {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You want to delete this item!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "red",
+                cancelButtonColor: "black",
+                confirmButtonText: "Delete"
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    const res = await axios.delete(`${BASE_URL}/api/delete-food/${id}`)
+                    if (res.status === 200) {
+                        setDeleteFlag(!deleteFlag)
+                        toast.success("food item deleted successfully")
+                    }
+                }
+            });
 
+        } catch (error) {
+            console.log(error)
+            toast.error("something went wrong")
+        }
+    }
+    const truncateText = (text, limit) => {
+        if (!text) return ""
+        return text.length > limit ? text.substring(0, limit) + "..." : text
+    }
     return (
         <div className="overflow-x-auto">
             <h2 className='text-center font-bold text-2xl '>All Foods</h2>
@@ -58,6 +92,7 @@ const DashBoardAllFoods = () => {
                             <th>Price</th>
                             <th>Qunatity</th>
                             <th>Rating</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -66,13 +101,20 @@ const DashBoardAllFoods = () => {
                                 <tr key={idx}>
                                     <th>{(page - 1) * page_size + (idx + 1)}</th>
                                     <td><img src={item.image} alt={item.name} className='h-12 w-12 rounded-xl' /></td>
-                                    <td>{item.name}</td>
-                                    <td>{item.description}</td>
+                                    <td>{item.title}</td>
+                                    <td className='hover:cursor-pointer' title={item.description}>{truncateText(item.description, 30)}</td>
                                     <td>{item.category}</td>
                                     <td>{item.origin}</td>
                                     <td>{item.price}</td>
                                     <td>{item.quantity}</td>
                                     <td>{item.rating}</td>
+                                    <td>
+                                        <div className='flex gap-5 items-center justify-center cursor-pointer'>
+                                            <Link to={`/dashboard/update-food/${item.id}`}><FaEdit size={20} /></Link>
+                                            <RiDeleteBin6Line onClick={() => deleteFoodItem(item.id)} size={20} color='red' />
+                                        </div>
+
+                                    </td>
                                 </tr>
                             )) : <tr>
                                 <td>no foods</td>
