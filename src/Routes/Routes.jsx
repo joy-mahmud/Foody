@@ -12,6 +12,7 @@ import CartPage from "../Pages/CartPage/CartPage";
 import AdminRoute from "../privateRoutes/AdminRoute";
 import DashBoardLayout from "../Layout/DashBoardLayout";
 import DashBoardAllFoods from "../Pages/Dashboard/DashBoardAllFoods";
+import DashboardHome from "../Pages/Dashboard/DashboardHome";
 
 const router = createBrowserRouter([
     {
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
         element: <AdminRoute><DashBoardLayout /></AdminRoute>,
         errorElement: <ErrorPage />,
         children: [
+            {
+                path: 'dashboard-home',
+                element: <AdminRoute><DashboardHome /></AdminRoute>
+            },
             {
                 path: 'add-food',
                 element: <AdminRoute><AddFoodItem /></AdminRoute>
