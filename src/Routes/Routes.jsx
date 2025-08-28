@@ -13,6 +13,7 @@ import AdminRoute from "../privateRoutes/AdminRoute";
 import DashBoardLayout from "../Layout/DashBoardLayout";
 import DashBoardAllFoods from "../Pages/Dashboard/DashBoardAllFoods";
 import DashboardHome from "../Pages/Dashboard/DashboardHome";
+import DashBoardAllUsers from "../Pages/Dashboard/DashBoardAllUsers";
 
 const router = createBrowserRouter([
     {
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
             {
                 path: 'all-foods',
                 element: <AdminRoute> <DashBoardAllFoods /></AdminRoute>
+            },
+            {
+                path: 'all-users',
+                element: <AdminRoute><DashBoardAllUsers /></AdminRoute>
             }
         ]
     }

@@ -19,21 +19,21 @@ const DashboardHome = () => {
         return
     }
     return (
-        <div className='px-10 py-20'>
+        <div className='px-5 py-20'>
             <div className='flex gap-5'>
-                <div className='h-20 flex justify-center items-center rounded-lg border w-[200px]'>
+                <div className='h-20 flex justify-center items-center rounded-lg border w-[190px]'>
                     <div>Total foods: {stats?.food_count}</div>
                 </div>
-                <div className='h-20 flex justify-center items-center rounded-lg border w-[200px]'>
+                <div className='h-20 flex justify-center items-center rounded-lg border w-[190px]'>
                     <div>Average rating:{stats?.avg_rating}</div>
                 </div>
-                <div className='h-20 flex justify-center items-center rounded-lg border w-[200px]'>
+                <div className='h-20 flex justify-center items-center rounded-lg border w-[190px]'>
                     <div>Average price:{stats.avg_price}</div>
                 </div>
-                <div className='h-20 flex justify-center items-center rounded-lg border w-[200px]'>
+                <div className='h-20 flex justify-center items-center rounded-lg border w-[190px]'>
                     <div>Total users:{stats.user_count}</div>
                 </div>
-                <div className='h-20 flex justify-center items-center rounded-lg border w-[200px]'>
+                <div className='h-20 flex justify-center items-center rounded-lg border w-[190px]'>
                     <div>Total cart quantity:{stats?.total_cart_qty}</div>
                 </div>
             </div>

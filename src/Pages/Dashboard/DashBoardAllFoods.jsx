@@ -77,7 +77,7 @@ const DashBoardAllFoods = () => {
     }
     return (
         <div className="overflow-x-auto">
-            <h2 className='text-center font-bold text-2xl '>All Foods</h2>
+            <h2 className='text-center font-bold text-2xl py-5'>All Foods</h2>
             <div className="overflow-x-auto rounded-box border-[2px] border-base-content/5 bg-base-100">
                 <table className="table">
                     {/* head */}
