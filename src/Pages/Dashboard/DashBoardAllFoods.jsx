@@ -109,7 +109,7 @@ const DashBoardAllFoods = () => {
                                     <td>{item.quantity}</td>
                                     <td>{item.rating}</td>
                                     <td>
-                                        <div className='flex gap-5 items-center justify-center cursor-pointer'>
+                                        <div className='flex gap-5 items-center justify-start cursor-pointer'>
                                             <Link to={`/dashboard/update-food/${item.id}`}><FaEdit size={20} /></Link>
                                             <RiDeleteBin6Line onClick={() => deleteFoodItem(item.id)} size={20} color='red' />
                                         </div>
