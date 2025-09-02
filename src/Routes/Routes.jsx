@@ -14,6 +14,7 @@ import DashBoardLayout from "../Layout/DashBoardLayout";
 import DashBoardAllFoods from "../Pages/Dashboard/DashBoardAllFoods";
 import DashboardHome from "../Pages/Dashboard/DashboardHome";
 import DashBoardAllUsers from "../Pages/Dashboard/DashBoardAllUsers";
+import PaymentPage from "../Pages/Payment/PaymentPage";
 
 const router = createBrowserRouter([
     {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
             {
                 path: 'cart',
                 element: <CartPage />
+            },
+            {
+                path: 'payment',
+                element: <PaymentPage />
             },
             {
                 path: 'login',

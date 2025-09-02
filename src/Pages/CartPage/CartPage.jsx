@@ -4,6 +4,7 @@ import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { CartContext } from '../../provider/CartProvider'
 import { MdDelete } from 'react-icons/md'
 import debounce from 'lodash.debounce'
+import { Link } from 'react-router-dom'
 
 const CartPage = () => {
     const { cart, loading, removeFromCart, updateQuantity } = useContext(CartContext)
@@ -91,7 +92,10 @@ const CartPage = () => {
                         {
                             cart && <div className='mt-8 flex justify-between items-center'>
                                 <h3 className='text-lg font-semibold'>Total:${totalPrice}</h3>
-                                <button className='px-5 py-2 text-white bg-yellow-500 hover:bg-yellow-600 rounded-lg'>Proceed to Checkout</button>
+                                <Link to={'/payment'}>
+                                    <button className='px-5 py-2 text-white btn btn-neutral hover:btn-outline rounded-lg'>Proceed to Checkout</button>
+                                </Link>
+
                             </div>
                         }
 
