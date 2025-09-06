@@ -12,7 +12,7 @@ const PaymentButton = ({ amount, totalItems, user }) => {
             num_of_items: totalItems || 1
         })
         if (res.status === 200) {
-            console.log("request sent successfully")
+            window.location.href = res.data.gateway_url;
         }
 
     }
