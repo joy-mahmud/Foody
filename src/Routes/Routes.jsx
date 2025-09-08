@@ -15,6 +15,7 @@ import DashBoardAllFoods from "../Pages/Dashboard/DashBoardAllFoods";
 import DashboardHome from "../Pages/Dashboard/DashboardHome";
 import DashBoardAllUsers from "../Pages/Dashboard/DashBoardAllUsers";
 import PaymentPage from "../Pages/Payment/PaymentPage";
+import PaymentSuccess from "../Pages/Payment/PaymentSuccess";
 
 const router = createBrowserRouter([
     {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
             {
                 path: 'payment',
                 element: <PaymentPage />
+            },
+            {
+                path: 'payment/success',
+                element: <PaymentSuccess />
             },
             {
                 path: 'login',
