@@ -16,6 +16,8 @@ import DashboardHome from "../Pages/Dashboard/DashboardHome";
 import DashBoardAllUsers from "../Pages/Dashboard/DashBoardAllUsers";
 import PaymentPage from "../Pages/Payment/PaymentPage";
 import PaymentSuccess from "../Pages/Payment/PaymentSuccess";
+import PaymentFailed from "../Pages/Payment/PaymentFailed";
+import PaymentCancelled from "../Pages/Payment/PaymentCancelled";
 
 const router = createBrowserRouter([
     {
@@ -46,6 +48,14 @@ const router = createBrowserRouter([
             {
                 path: 'payment/success',
                 element: <PaymentSuccess />
+            },
+            {
+                path: 'payment/fail',
+                element: <PaymentFailed />
+            },
+            {
+                path: 'payment/cancel',
+                element: <PaymentCancelled />
             },
             {
                 path: 'login',
