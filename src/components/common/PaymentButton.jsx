@@ -17,7 +17,7 @@ const PaymentButton = ({ amount, totalItems, user }) => {
 
     }
     return (
-        <button onClick={handlePayment} className='px-5 py-2 rounded-lg bg-blue-500 hover:bg-blue-600 hover:cursor-pointer'>
+        <button className='px-5 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 hover:cursor-pointer'>
             Pay With SSLCOMMERZ
         </button>
     )
