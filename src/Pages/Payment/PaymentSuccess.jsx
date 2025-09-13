@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import ConfettiExplosion from "react-confetti-explosion";
+import { FaCheck } from "react-icons/fa";
 
 const PaymentSuccess = () => {
     const { tran_id, amount } = useParams();
@@ -14,11 +15,11 @@ const PaymentSuccess = () => {
     }, []);
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-green-100 via-white to-green-200 px-6">
+        <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-green-200 via-white to-green-300 px-6">
             {showConfetti && (
                 <ConfettiExplosion
-                    force={0.7}
-                    duration={3000}
+                    force={0.8}
+                    duration={4000}
                     particleCount={200}
                     width={1600}
                 />
@@ -27,7 +28,7 @@ const PaymentSuccess = () => {
             <div className="bg-white shadow-xl rounded-2xl p-8 max-w-md w-full text-center border-t-4 border-green-500">
                 <div className="flex items-center justify-center mb-6">
                     <div className="w-20 h-20 flex items-center justify-center rounded-full bg-green-100">
-                        <svg
+                        {/* <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-12 w-12 text-green-600"
                             fill="none"
@@ -36,7 +37,8 @@ const PaymentSuccess = () => {
                             strokeWidth={2}
                         >
                             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                        </svg>
+                        </svg> */}
+                        <FaCheck className="text-green-700" size={30} />
                     </div>
                 </div>
 
