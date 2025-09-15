@@ -12,10 +12,11 @@ const PaymentPage = () => {
     const { user } = useContext(AuthContext)
     const [formData, setFormData] = useState({ name: "", email: "", phone: "", address: "" })
     const [sslRedirectLoading, setSslRedirectLoading] = useState(false)
+    const [isButtonDisabled, setIsButtonDisabled] = useState(false)
     useEffect(() => {
         if (!loading) {
             setTotalPrice(cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2))
-
+            setIsButtonDisabled(cart.length === 0)
         }
     }, [loading, cart])
     const handlePayment = async (e) => {
@@ -78,7 +79,7 @@ const PaymentPage = () => {
                     </div>
 
                     <div className='flex justify-center mt-3'>
-                        <button type='submit' className='w-full px-5 py-2 text-white font-semibold shadow-md transition-all duration-200 rounded-lg bg-indigo-600 hover:bg-indigo-700 hover:cursor-pointer'>
+                        <button disabled={isButtonDisabled} type='submit' className={`w-full px-5 py-2 text-white font-semibold shadow-md transition-all duration-200 rounded-lg bg-indigo-600 hover:bg-indigo-700 ${isButtonDisabled ? 'hover:cursor-not-allowed' : 'hover:cursor-pointer'} `}>
                             {sslRedirectLoading ? "Redirecting.." : " Pay With SSLCOMMERZ"}
 
                         </button>
