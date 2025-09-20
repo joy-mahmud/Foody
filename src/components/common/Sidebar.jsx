@@ -1,5 +1,5 @@
 import React from 'react'
-import { CiViewList } from 'react-icons/ci'
+import { CiCircleList, CiViewList } from 'react-icons/ci'
 import { GoHome } from 'react-icons/go'
 import { IoAddCircleOutline } from 'react-icons/io5'
 import { LuUsers } from 'react-icons/lu'
@@ -21,6 +21,12 @@ const Sidebar = () => {
                         <span>All-Food</span>
                     </li>
                 </Link>
+                <Link to={'all-orders'}>
+                    <li className='flex items-center justify-start gap-1 text-white pl-5 pr-2 py-2 rounded-full bg-orange-700 font-medium hover:bg-orange-500 hover:scale-105 transition-all duration-300'>
+                        <CiCircleList size={20} />
+                        <span>All Orders</span>
+                    </li>
+                </Link>
                 <Link to={'all-users'}>
                     <li className='flex items-center justify-start gap-1 text-white pl-5 pr-2 py-2 rounded-full bg-orange-700 font-medium hover:bg-orange-500 hover:scale-105 transition-all duration-300'>
                         <LuUsers size={20} />
@@ -33,6 +39,7 @@ const Sidebar = () => {
                         <span>Add-Food</span>
                     </li>
                 </Link>
+
             </ul>
         </div>
     )

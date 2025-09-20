@@ -18,6 +18,7 @@ import PaymentPage from "../Pages/Payment/PaymentPage";
 import PaymentSuccess from "../Pages/Payment/PaymentSuccess";
 import PaymentFailed from "../Pages/Payment/PaymentFailed";
 import PaymentCancelled from "../Pages/Payment/PaymentCancelled";
+import AllOrders from "../Pages/Dashboard/AllOrders";
 
 const router = createBrowserRouter([
     {
@@ -92,6 +93,10 @@ const router = createBrowserRouter([
             {
                 path: 'all-users',
                 element: <AdminRoute><DashBoardAllUsers /></AdminRoute>
+            },
+            {
+                path: 'all-orders',
+                element: <AdminRoute><AllOrders /></AdminRoute>
             }
         ]
     }
