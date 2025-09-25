@@ -9,7 +9,7 @@ const DashBoardLayout = () => {
             <Navbar />
             <div className='flex'>
                 <Sidebar />
-                <div className='grow'>
+                <div className='flex-1 overflow-auto'>
                     <Outlet >
 
                     </Outlet>
